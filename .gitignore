@@ -218,3 +218,5 @@ pip-log.txt
 ## boost
 #############
 boost/
+.idea
+external

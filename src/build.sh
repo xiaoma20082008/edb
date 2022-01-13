@@ -1,7 +1,7 @@
+#!/bin/sh
 #################################
 # Build script for EmeraldDB    #
 #################################
-#!/bin/sh
 rm configure.in
 autoscan
 cp configure.in.bak configure.in
