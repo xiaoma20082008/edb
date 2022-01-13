@@ -21,4 +21,5 @@ FetchContent_Declare(
         SOURCE_SUBDIR  cmake
         GIT_PROGRESS   TRUE
 )
+set(protobuf_BUILD_TESTS OFF CACHE INTERNAL "")
 FetchContent_MakeAvailable(protobuf)
