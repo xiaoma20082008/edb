@@ -15,10 +15,9 @@
 # limitations under the License.
 #
 FetchContent_Declare(
-        protobuf
-        GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-        GIT_TAG        v3.19.3
-        SOURCE_SUBDIR  cmake
+        spdlog
+        GIT_REPOSITORY https://github.com/gabime/spdlog.git
+        GIT_TAG        v1.9.2
         GIT_PROGRESS   TRUE
 )
-FetchContent_MakeAvailable(protobuf)
+FetchContent_MakeAvailable(spdlog)
