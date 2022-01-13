@@ -30,5 +30,5 @@ add_dependencies(edb2 configure_edb)
 add_executable(cli client.cc)
 add_executable(srv server.cc)
 
-target_link_libraries(srv PRIVATE edb2)
-target_link_libraries(cli PRIVATE edb2)
+target_link_libraries(srv PRIVATE edb2 spdlog protobuf::libprotobuf)
+target_link_libraries(cli PRIVATE edb2 spdlog protobuf::libprotobuf)

@@ -22,4 +22,7 @@ FetchContent_Declare(
         GIT_PROGRESS   TRUE
 )
 set(protobuf_BUILD_TESTS OFF CACHE INTERNAL "")
+set(protobuf_BUILD_SHARED_LIBS ON CACHE INTERNAL "")
+set(protobuf_DISABLE_RTTI OFF CACHE INTERNAL "")
+add_definitions("-DNDEBUG")
 FetchContent_MakeAvailable(protobuf)

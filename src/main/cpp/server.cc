@@ -14,10 +14,12 @@
 // Created by chunxiao ma on 2022/1/12.
 //
 #include "options.hh"
+#include <spdlog/spdlog.h>
 using namespace edb;
 
 int main(int argc, char **argv) {
   EdbOptions options{};
   options.Parse(argc, argv);
+  spdlog::info("hello world");
   return 0;
 }
