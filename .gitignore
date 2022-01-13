@@ -235,4 +235,4 @@ pip-log.txt
 #############
 boost/
 .idea
-external
+external/vendor

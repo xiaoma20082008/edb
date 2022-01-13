@@ -11,13 +11,37 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/12.
+// Created by chunxiao ma on 2022/1/13.
 //
-#include "options.hh"
-using namespace edb;
 
-int main(int argc, char **argv) {
-  EdbOptions options{};
-  options.Parse(argc, argv);
-  return 0;
-}
+#ifndef EDB_OPTIONS_HH
+#define EDB_OPTIONS_HH
+namespace edb {
+class EdbOptions {
+public:
+  EdbOptions();
+  ~EdbOptions();
+
+public:
+  int Parse(int argc, char **argv);
+
+  // region getter
+
+  int GetPort();
+  int GetPoolSize();
+  const char *GetName();
+  const char *GetBaseDir();
+  const char *GetDataDir();
+
+  // endregion getter
+
+private:
+  const char *base_dir_{};
+  const char *data_dir_{};
+  const char *name_{};
+  int port_{};
+  int pool_size_{};
+};
+
+} // namespace edb
+#endif // EDB_OPTIONS_HH

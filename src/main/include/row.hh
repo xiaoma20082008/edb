@@ -11,13 +11,15 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/12.
+// Created by chunxiao ma on 2022/1/13.
 //
-#include "options.hh"
-using namespace edb;
 
-int main(int argc, char **argv) {
-  EdbOptions options{};
-  options.Parse(argc, argv);
-  return 0;
-}
+#ifndef EDB_ROW_HH
+#define EDB_ROW_HH
+namespace edb {
+struct Row {
+  unsigned long page_id_{};
+  unsigned long slot_id_{};
+};
+} // namespace edb
+#endif // EDB_ROW_HH

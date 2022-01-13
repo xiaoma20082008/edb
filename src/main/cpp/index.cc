@@ -10,14 +10,26 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-//
-// Created by chunxiao ma on 2022/1/12.
-//
-#include "options.hh"
-using namespace edb;
+#include "index.hh"
+#include "common.hh"
 
-int main(int argc, char **argv) {
-  EdbOptions options{};
-  options.Parse(argc, argv);
-  return 0;
+namespace edb {
+
+struct IndexManager::Index {
+  char *data_{};
+  IndexData *idx_{};
+};
+
+IndexManager::IndexManager() {}
+IndexManager::~IndexManager() {
+  for (auto *idx : indexes_) {
+    delete idx;
+  }
 }
+
+int IndexManager::IdExists(void *record) { return EDB_OK; }
+int IndexManager::CreateIndex(void *record, Row *rid) { return EDB_OK; }
+int IndexManager::FindIndex(void *record, Row *rid) { return EDB_OK; }
+int IndexManager::DropIndex(void *record, Row *rid) { return EDB_OK; }
+
+} // namespace edb

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-cmake_minimum_required(VERSION 3.1...3.16)
+cmake_minimum_required(VERSION 3.16)
 
 foreach(policy
         CMP0023
@@ -49,9 +49,6 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/lib)
 set(CMAKE_MODULE_PATH "${CMAKE_HOME_DIRECTORY}/cmake")
 
 
-# external dependencies
-include(ExternalProject)
-include(FetchContent)
-
 # sources
+add_subdirectory(external)
 add_subdirectory(src)

@@ -14,21 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-add_library(edb2)
-target_sources(
-        edb2 PRIVATE
-        command.cc
-        index.cc
-        msg.cc
-        options.cc
-        row.cc
-)
-add_dependencies(edb2 configure_edb)
+include(ExternalProject)
+include(FetchContent)
 
-#target_link_libraries(edb2 PRIVATE spdlog)
+set(FETCHCONTENT_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
 
-add_executable(cli client.cc)
-add_executable(srv server.cc)
-
-target_link_libraries(srv PRIVATE edb2)
-target_link_libraries(cli PRIVATE edb2)
+include(bson)
+include(googletest)
+include(protobuf)
+include(spdlog)
