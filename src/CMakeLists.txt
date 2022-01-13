@@ -28,7 +28,6 @@ set(EDB_SOURCES
 add_library(edb SHARED ${EDB_SOURCES})
 target_include_directories(edb PRIVATE include)
 target_link_directories(edb PRIVATE include)
-target_link_libraries(edb PRIVATE bson_shared)
 
 set(CLIENT_SOURCES client/edb.cpp client/command.cpp client/commandFactory.cpp)
 set(SERVER_SOURCES pmd/pmdMain.cpp pmd/pmd.cpp pmd/pmdAgent.cpp pmd/pmdEDU.cpp pmd/pmdEDUMgr.cpp pmd/pmdOptions.cpp pmd/pmdTcpListener.cpp)
