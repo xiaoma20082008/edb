@@ -22,13 +22,14 @@ target_sources(
         msg.cc
         options.cc
         row.cc
+        session.cc
 )
 add_dependencies(edb2 configure_edb)
 
 #target_link_libraries(edb2 PRIVATE spdlog)
 
-add_executable(cli client.cc)
-add_executable(srv server.cc)
+add_executable(cli main_cli.cc)
+add_executable(srv main_srv.cc server.cc)
 
-target_link_libraries(srv PRIVATE edb2 spdlog protobuf::libprotobuf)
-target_link_libraries(cli PRIVATE edb2 spdlog protobuf::libprotobuf)
+target_link_libraries(srv PRIVATE bsoncxx_shared asio edb2 spdlog protobuf::libprotobuf)
+target_link_libraries(cli PRIVATE asio edb2 spdlog protobuf::libprotobuf)

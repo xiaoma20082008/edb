@@ -14,27 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-#ExternalProject_Add(
-#        mongo-cxx-driver
-#        GIT_REPOSITORY      https://github.com/mongodb/mongo-cxx-driver.git
-#        GIT_TAG             r3.6.6
-#        PREFIX              ${CMAKE_HOME_DIRECTORY}/external/mongo-cxx-driver
-#        TIMEOUT             100
-#        CMAKE_ARGS          "-DCMAKE_BUILD_TYPE=Release"
-#        CONFIGURE_COMMAND   ""
-#        BUILD_COMMAND       ""
-#        INSTALL_COMMAND     ""
-#        UPDATE_COMMAND      ""
-#)
 FetchContent_Declare(
-        mongo-cxx-driver
-        GIT_REPOSITORY https://github.com/mongodb/mongo-cxx-driver.git
-        GIT_TAG        r3.6.6
+        asio
+        GIT_REPOSITORY https://github.com/chriskohlhoff/asio.git
+        GIT_TAG        asio-1-21-0
         GIT_SHALLOW    TRUE
 )
-FetchContent_GetProperties(mongo-cxx-driver)
-if(NOT mongo-cxx-driver_POPULATED)
-    FetchContent_Populate(mongo-cxx-driver)
+FetchContent_GetProperties(asio)
+if(NOT asio_POPULATED)
+    FetchContent_Populate(asio)
 endif()
-#add_subdirectory(${mongo-cxx-driver_SOURCE_DIR})
-FetchContent_MakeAvailable(mongo-cxx-driver)
+add_library(asio INTERFACE)
+
+target_include_directories(asio INTERFACE ${asio_SOURCE_DIR}/asio/include)
+target_compile_definitions(asio INTERFACE ASIO_STANDALONE ASIO_NO_DEPRECATED)

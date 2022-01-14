@@ -11,15 +11,56 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/12.
+// Created by chunxiao ma on 2022/1/13.
 //
-#include "options.hh"
+#include "server.hh"
+#include <asio.hpp>
+#include <chrono>
+#include <csignal>
 #include <spdlog/spdlog.h>
-using namespace edb;
+#include <thread>
+namespace edb {
+using namespace asio;
+using namespace std;
+using namespace std::chrono_literals;
 
-int main(int argc, char **argv) {
-  EdbOptions options{};
-  options.Parse(argc, argv);
-  spdlog::info("hello world");
-  return 0;
+static void OnSignal(int code) {
+  spdlog::info("code=%d", code);
+  EdbServer::GetInstance()->Close();
 }
+
+EdbServer::EdbServer() noexcept {}
+EdbServer::~EdbServer() noexcept { Close(); }
+EdbServer *EdbServer::GetInstance() noexcept {
+  static EdbServer server{};
+  return &server;
+}
+
+int EdbServer::Init(int argc, char **argv) noexcept {
+  int ret = options_.Parse(argc, argv);
+  if (ret == EDB_OK) {
+    this->initialized_ = true;
+  }
+  return ret;
+}
+
+int EdbServer::Start() noexcept {
+  this->running_ = true;
+
+  std::signal(SIGINT, OnSignal);
+  std::signal(SIGQUIT, OnSignal);
+  std::signal(SIGKILL, OnSignal);
+  std::signal(SIGTERM, OnSignal);
+  return EDB_OK;
+}
+
+int EdbServer::Await() noexcept {
+  while (this->running_) {
+    std::this_thread::sleep_for(1000ms);
+  }
+  return EDB_OK;
+}
+
+void EdbServer::Close() noexcept { this->running_ = false; }
+
+} // namespace edb

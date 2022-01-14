@@ -19,6 +19,7 @@ include(FetchContent)
 
 set(FETCHCONTENT_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
 
+include(asio)
 include(bson)
 include(googletest)
 include(protobuf)

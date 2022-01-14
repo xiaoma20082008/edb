@@ -14,32 +14,33 @@
 // Created by chunxiao ma on 2022/1/13.
 //
 
+#ifndef EDB_SERVER_HH
+#define EDB_SERVER_HH
 #include "options.hh"
-#include <string>
-#include <unordered_map>
 namespace edb {
-using namespace std;
+class EdbServer {
+private:
+  EdbServer() noexcept;
+  ~EdbServer() noexcept;
 
-EdbOptions::EdbOptions() {}
-EdbOptions::~EdbOptions() {}
-int EdbOptions::Parse(int argc, char **argv) {
-  // --base-dir=
-  // --data-dir=
-  // --name=
-  // --port=
-  // --pool-size=
-  int ret = EDB_OK;
-  return ret;
-}
+  __no_copy__(EdbServer);
+  __no_move__(EdbServer);
 
-// region getter
+public:
+  static EdbServer *GetInstance() noexcept;
 
-int EdbOptions::GetPort() { return port_; }
-int EdbOptions::GetPoolSize() { return pool_size_; }
-const char *EdbOptions::GetSrvName() { return name_; }
-const char *EdbOptions::GetBaseDir() { return base_dir_; }
-const char *EdbOptions::GetDataDir() { return data_dir_; }
+  int Init(int argc, char **argv) noexcept;
 
-// endregion getter
+  int Start() noexcept;
 
+  int Await() noexcept;
+
+  void Close() noexcept;
+
+private:
+  volatile bool initialized_{false};
+  volatile bool running_{false};
+  EdbOptions options_{};
+};
 } // namespace edb
+#endif // EDB_SERVER_HH

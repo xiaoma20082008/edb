@@ -37,7 +37,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-set(CXX_COMMON_FLAGS "-std=c++17 -Wall -Werror -fno-rtti -fPIC -fPIE")
+set(CXX_COMMON_FLAGS "-std=c++17 -Wall -Werror -fno-rtti -fno-exceptions -fPIC -fPIE")
 set(CMAKE_CXX_FLAGS_DEBUG "-g -O0 ${CXX_COMMON_FLAGS} -fno-inline")
 set(CMAKE_CXX_FLAGS_RELEASE " -O1 ${CXX_COMMON_FLAGS}")
 

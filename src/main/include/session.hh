@@ -11,40 +11,15 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/14.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
-#include "common.hh"
-
+#ifndef EDB_SESSION_HH
+#define EDB_SESSION_HH
+#include <memory>
 namespace edb {
-class EdbOptions {
-public:
-  EdbOptions();
-  ~EdbOptions();
-
-public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort();
-  int GetPoolSize();
-  const char *GetSrvName();
-  const char *GetBaseDir();
-  const char *GetDataDir();
-
-  // endregion getter
-
+class Session : public std::enable_shared_from_this<Session> {
 private:
-  const char *base_dir_{};
-  const char *data_dir_{};
-  const char *name_{};
-  int port_{};
-  int pool_size_{};
 };
-
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_SESSION_HH
