@@ -19,7 +19,6 @@ FetchContent_Declare(
         GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
         GIT_TAG        v3.19.3
         SOURCE_SUBDIR  cmake
-        GIT_PROGRESS   TRUE
 )
 set(protobuf_BUILD_TESTS OFF CACHE INTERNAL "")
 set(protobuf_BUILD_SHARED_LIBS ON CACHE INTERNAL "")

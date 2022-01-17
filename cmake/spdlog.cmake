@@ -18,6 +18,6 @@ FetchContent_Declare(
         spdlog
         GIT_REPOSITORY https://github.com/gabime/spdlog.git
         GIT_TAG        v1.9.2
-        GIT_PROGRESS   TRUE
 )
+set(SPDLOG_NO_EXCEPTIONS ON CACHE INTERNAL "")
 FetchContent_MakeAvailable(spdlog)

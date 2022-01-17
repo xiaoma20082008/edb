@@ -30,7 +30,6 @@ FetchContent_Declare(
         mongo-cxx-driver
         GIT_REPOSITORY https://github.com/mongodb/mongo-cxx-driver.git
         GIT_TAG        r3.6.6
-        GIT_SHALLOW    TRUE
 )
 FetchContent_GetProperties(mongo-cxx-driver)
 if(NOT mongo-cxx-driver_POPULATED)

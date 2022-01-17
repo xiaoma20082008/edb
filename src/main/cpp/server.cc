@@ -14,13 +14,11 @@
 // Created by chunxiao ma on 2022/1/13.
 //
 #include "server.hh"
-#include <asio.hpp>
 #include <chrono>
 #include <csignal>
 #include <spdlog/spdlog.h>
 #include <thread>
 namespace edb {
-using namespace asio;
 using namespace std;
 using namespace std::chrono_literals;
 

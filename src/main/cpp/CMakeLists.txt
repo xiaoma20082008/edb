@@ -31,5 +31,5 @@ add_dependencies(edb2 configure_edb)
 add_executable(cli main_cli.cc)
 add_executable(srv main_srv.cc server.cc)
 
-target_link_libraries(srv PRIVATE bsoncxx_shared asio edb2 spdlog protobuf::libprotobuf)
+target_link_libraries(srv PRIVATE asio edb2 spdlog protobuf::libprotobuf)
 target_link_libraries(cli PRIVATE asio edb2 spdlog protobuf::libprotobuf)

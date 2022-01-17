@@ -1,5 +1,4 @@
 # edb
-=============
 
 A Mini Database Engine
 
