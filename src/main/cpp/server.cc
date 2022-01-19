@@ -14,6 +14,8 @@
 // Created by chunxiao ma on 2022/1/13.
 //
 #include "server.hh"
+#include "session.hh"
+#include <asio.hpp>
 #include <chrono>
 #include <csignal>
 #include <spdlog/spdlog.h>
@@ -27,7 +29,13 @@ static void OnSignal(int code) {
   EdbServer::GetInstance()->Close();
 }
 
-EdbServer::EdbServer() noexcept {}
+struct EdbServer::Impl {
+  volatile bool initialized_{false};
+  volatile bool running_{false};
+  EdbOptions options_{};
+};
+
+EdbServer::EdbServer() noexcept : impl_(std::make_shared<EdbServer::Impl>()) {}
 EdbServer::~EdbServer() noexcept { Close(); }
 EdbServer *EdbServer::GetInstance() noexcept {
   static EdbServer server{};
@@ -35,16 +43,15 @@ EdbServer *EdbServer::GetInstance() noexcept {
 }
 
 int EdbServer::Init(int argc, char **argv) noexcept {
-  int ret = options_.Parse(argc, argv);
+  int ret = impl_->options_.Parse(argc, argv);
   if (ret == EDB_OK) {
-    this->initialized_ = true;
+    impl_->initialized_ = true;
   }
   return ret;
 }
 
 int EdbServer::Start() noexcept {
-  this->running_ = true;
-
+  impl_->running_ = true;
   std::signal(SIGINT, OnSignal);
   std::signal(SIGQUIT, OnSignal);
   std::signal(SIGKILL, OnSignal);
@@ -53,12 +60,12 @@ int EdbServer::Start() noexcept {
 }
 
 int EdbServer::Await() noexcept {
-  while (this->running_) {
+  while (impl_->running_) {
     std::this_thread::sleep_for(1000ms);
   }
   return EDB_OK;
 }
 
-void EdbServer::Close() noexcept { this->running_ = false; }
+void EdbServer::Close() noexcept { impl_->running_ = false; }
 
 } // namespace edb

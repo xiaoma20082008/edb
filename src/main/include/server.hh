@@ -17,6 +17,7 @@
 #ifndef EDB_SERVER_HH
 #define EDB_SERVER_HH
 #include "options.hh"
+#include <memory>
 namespace edb {
 class EdbServer {
 private:
@@ -38,9 +39,8 @@ public:
   void Close() noexcept;
 
 private:
-  volatile bool initialized_{false};
-  volatile bool running_{false};
-  EdbOptions options_{};
+  struct Impl;
+  std::shared_ptr<Impl> impl_{};
 };
 } // namespace edb
 #endif // EDB_SERVER_HH

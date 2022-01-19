@@ -20,10 +20,11 @@ FetchContent_Declare(
         GIT_TAG        asio-1-21-0
 )
 FetchContent_GetProperties(asio)
-if(NOT asio_POPULATED)
+if (NOT asio_POPULATED)
     FetchContent_Populate(asio)
-endif()
+endif ()
 add_library(asio INTERFACE)
 
 target_include_directories(asio INTERFACE ${asio_SOURCE_DIR}/asio/include)
-target_compile_definitions(asio INTERFACE ASIO_HEADER_ONLY ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_NO_EXCEPTIONS ASIO_NO_TYPEID ASIO_NO_TS_EXECUTORS)
+# ASIO_NO_EXCEPTIONS 定义这个需要用户实现throw_error等方法,参考: https://github.com/chriskohlhoff/asio/issues/302
+target_compile_definitions(asio INTERFACE ASIO_HEADER_ONLY ASIO_STANDALONE ASIO_NO_DEPRECATED ASIO_NO_TYPEID ASIO_NO_TS_EXECUTORS)

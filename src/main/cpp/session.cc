@@ -16,5 +16,11 @@
 
 #include "session.hh"
 namespace edb {
+struct Session::Impl {};
 
-}
+Session::Session() : impl_(std::make_shared<Session::Impl>()) {}
+Session::~Session() {}
+void Session::Read() {}
+void Session::Write() {}
+
+} // namespace edb

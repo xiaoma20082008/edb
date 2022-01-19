@@ -20,7 +20,16 @@
 namespace edb {
 class Session : public std::enable_shared_from_this<Session> {
 public:
+  Session();
+  ~Session();
+
+public:
+  void Read();
+  void Write();
+
 private:
+  struct Impl;
+  const std::shared_ptr<Impl> impl_{};
 };
 } // namespace edb
 #endif // EDB_SESSION_HH
