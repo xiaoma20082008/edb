@@ -17,6 +17,7 @@
 include(ExternalProject)
 include(FetchContent)
 
+set(EXTERNAL_PROJECT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
 set(FETCHCONTENT_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
 
 include(asio)

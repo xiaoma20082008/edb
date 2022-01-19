@@ -18,6 +18,7 @@ add_subdirectory(include)
 add_subdirectory(cpp)
 add_subdirectory(java)
 
+# setup include directories
 include(GNUInstallDirs)
 target_include_directories(edb2 PUBLIC
         $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}/include>

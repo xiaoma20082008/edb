@@ -15,17 +15,44 @@
 # limitations under the License.
 #
 #ExternalProject_Add(
-#        mongo-cxx-driver
-#        GIT_REPOSITORY      https://github.com/mongodb/mongo-cxx-driver.git
-#        GIT_TAG             r3.6.6
-#        PREFIX              ${CMAKE_HOME_DIRECTORY}/external/vendor
+#        mongo-c-driver
+#        GIT_REPOSITORY      https://github.com/mongodb/mongo-c-driver.git
+#        GIT_TAG             1.20.1
+#        PREFIX              ${EXTERNAL_PROJECT_DIR}
 #        TIMEOUT             100
-#        CMAKE_ARGS          "-DCMAKE_BUILD_TYPE=Release"
+#        CMAKE_CACHE_ARGS    ""
 #        CONFIGURE_COMMAND   ""
 #        BUILD_COMMAND       ""
 #        INSTALL_COMMAND     ""
 #        UPDATE_COMMAND      ""
 #)
+#ExternalProject_Add(
+#        mongo-cxx-driver
+#        GIT_REPOSITORY      https://github.com/mongodb/mongo-cxx-driver.git
+#        GIT_TAG             r3.6.6
+#        PREFIX              ${EXTERNAL_PROJECT_DIR}
+#        TIMEOUT             100
+#        CMAKE_CACHE_ARGS    ""
+#        CONFIGURE_COMMAND   ""
+#        BUILD_COMMAND       ""
+#        INSTALL_COMMAND     ""
+#        UPDATE_COMMAND      ""
+#        DEPENDS             mongo-c-driver
+#)
+FetchContent_Declare(
+        mongo-c-driver
+        GIT_REPOSITORY https://github.com/mongodb/mongo-c-driver.git
+        GIT_TAG        1.20.1
+)
+FetchContent_GetProperties(mongo-c-driver)
+if(NOT mongo-c-driver_POPULATED)
+    FetchContent_Populate(mongo-c-driver)
+endif()
+#message("mongo-c-driver-source-dir:${mongo-c-driver_SOURCE_DIR}")
+#message("mongo-c-driver-binary-dir:${mongo-c-driver_BINARY_DIR}")
+#FetchContent_MakeAvailable(mongo-c-driver)
+#add_subdirectory(${mongo-c-driver_SOURCE_DIR})
+
 FetchContent_Declare(
         mongo-cxx-driver
         GIT_REPOSITORY https://github.com/mongodb/mongo-cxx-driver.git
@@ -35,5 +62,7 @@ FetchContent_GetProperties(mongo-cxx-driver)
 if(NOT mongo-cxx-driver_POPULATED)
     FetchContent_Populate(mongo-cxx-driver)
 endif()
+#message("mongo-cxx-driver-source-dir:${mongo-cxx-driver_SOURCE_DIR}")
+#message("mongo-cxx-driver-binary-dir:${mongo-cxx-driver_BINARY_DIR}")
+#FetchContent_MakeAvailable(mongo-cxx-driver)
 #add_subdirectory(${mongo-cxx-driver_SOURCE_DIR})
-FetchContent_MakeAvailable(mongo-cxx-driver)

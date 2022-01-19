@@ -15,4 +15,6 @@
 //
 
 #include "session.hh"
-namespace edb {}
+namespace edb {
+
+}

@@ -22,5 +22,5 @@ mkdir -p build/Debug && cd build/Debug && cmake ../.. && make
 ## Credit
 
 * Network using [Asio](https://github.com/chriskohlhoff/asio.git)
-* Logging using [SPDLOG](https://github.com/google/googletest.git)
-* Test using [GTEST](https://github.com/gabime/spdlog.git)
+* Logging using [SPDLOG](https://github.com/gabime/spdlog.git)
+* Test using [GTEST](https://github.com/google/googletest.git)
