@@ -2,14 +2,6 @@
 
 A Mini Database Engine
 
-## Features
-
-- [ ] Client/Server based on [Asio](https://github.com/chriskohlhoff/asio.git)
-- [ ] Transaction Manager
-- [ ] Index Manager
-- [ ] Page Manager
-- [ ] File Manager
-
 ## Build
 
 ```shell
@@ -20,7 +12,7 @@ mkdir -p build/Debug && cd build/Debug && cmake ../.. && make
 ```
 
 ## Docs
-* [Arch](docs/architecture.md)
+* [Detail](docs/index.md)
 
 ## Credit
 
