@@ -14,7 +14,7 @@ A Mini Database Engine
 
 ```shell
 cd ~
-git clone https://github.com/xiaoma20082008/emeralddb.git edb
+git clone https://github.com/xiaoma20082008/edb.git
 cd edb
 mkdir -p build/Debug && cd build/Debug && cmake ../.. && make
 ```
