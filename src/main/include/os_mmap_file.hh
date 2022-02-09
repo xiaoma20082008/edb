@@ -10,26 +10,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "index.hh"
-#include "common.hh"
+//
+// Created by chunxiao ma on 2022/1/21.
+//
 
+#ifndef EDB_OS_MMAP_FILE_HH
+#define EDB_OS_MMAP_FILE_HH
+#include "os_file.hh"
 namespace edb {
-
-struct IndexManager::Index {
-  char *data_{};
-  IndexData *idx_{};
-};
-
-IndexManager::IndexManager() {}
-IndexManager::~IndexManager() {
-  for (auto *idx : indexes_) {
-    delete idx;
-  }
-}
-
-int IndexManager::IdExists(void *record) { return EDB_OK; }
-int IndexManager::CreateIndex(void *record, Row *rid) { return EDB_OK; }
-int IndexManager::FindIndex(void *record, Row *rid) { return EDB_OK; }
-int IndexManager::DropIndex(void *record, Row *rid) { return EDB_OK; }
-
+class MMapFile : public File {};
 } // namespace edb
+#endif // EDB_OS_MMAP_FILE_HH

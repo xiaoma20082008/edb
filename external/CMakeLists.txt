@@ -17,13 +17,14 @@
 include(ExternalProject)
 include(FetchContent)
 
-set(EXTERNAL_PROJECT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
-set(FETCHCONTENT_BASE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
+set(VENDOR_DIR "${CMAKE_CURRENT_SOURCE_DIR}/vendor")
+set(EXTERNAL_PROJECT_BASE_DIR "${VENDOR_DIR}")
+set(FETCHCONTENT_BASE_DIR     "${VENDOR_DIR}")
 
 include(asio)
-include(bson)
 if (BUILD_TESTING)
     include(googletest)
-    include(protobuf)
 endif ()
+include(protobuf)
+include(json)
 include(spdlog)

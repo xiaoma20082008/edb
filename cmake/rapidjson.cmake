@@ -15,15 +15,15 @@
 # limitations under the License.
 #
 FetchContent_Declare(
-        protobuf
-        GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-        GIT_TAG        v3.19.3
-        SOURCE_SUBDIR  cmake
+        rapidjson
+        GIT_REPOSITORY https://github.com/Tencent/rapidjson.git
+        GIT_TAG v1.1.0
 )
-set(protobuf_BUILD_TESTS            OFF CACHE INTERNAL "")
-set(protobuf_BUILD_PROTOC_BINARIES  OFF CACHE INTERNAL "")
-set(protobuf_BUILD_LIBPROTOC        OFF CACHE INTERNAL "")
-set(protobuf_BUILD_SHARED_LIBS      ON  CACHE INTERNAL "")
-set(protobuf_DISABLE_RTTI           ON  CACHE INTERNAL "")
-add_definitions("-DNDEBUG")
-FetchContent_MakeAvailable(protobuf)
+FetchContent_GetProperties(rapidjson)
+if (NOT rapidjson_POPULATED)
+    FetchContent_Populate(rapidjson)
+endif ()
+add_library(rapidjson INTERFACE)
+
+target_include_directories(rapidjson INTERFACE ${rapidjson_SOURCE_DIR}/include)
+target_compile_definitions(rapidjson INTERFACE RAPIDJSON_BUILD_DOC=OFF RAPIDJSON_BUILD_EXAMPLES=OFF RAPIDJSON_BUILD_TESTS=OFF)

@@ -11,35 +11,10 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/21.
 //
 
-#ifndef EDB_INDEX_HH
-#define EDB_INDEX_HH
-#include "row.hh"
-#include <vector>
-namespace edb {
-
-struct IndexData {
-  const char *data_{};
-  Row rid_{};
-};
-
-class IndexManager {
-public:
-  IndexManager();
-  ~IndexManager();
-
-public:
-  int IdExists(void *record);
-  int FindIndex(void *record, Row *rid);
-  int CreateIndex(void *record, Row *rid);
-  int DropIndex(void *record, Row *rid);
-
-private:
-  struct Index;
-  std::vector<Index *> indexes_{};
-};
-
-} // namespace edb
-#endif // EDB_INDEX_HH
+#ifndef EDB_LOG_HH
+#define EDB_LOG_HH
+namespace edb {}
+#endif // EDB_LOG_HH

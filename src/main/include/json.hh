@@ -11,40 +11,13 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/21.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
-#include "common.hh"
-
+#ifndef EDB_JSON_HH
+#define EDB_JSON_HH
 namespace edb {
-class EdbOptions {
-public:
-  EdbOptions();
-  ~EdbOptions();
-
-public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
-
-private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
-};
-
+struct JsonObject;
+struct JsonArray;
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_JSON_HH

@@ -11,40 +11,20 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/20.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
-#include "common.hh"
-
+#ifndef EDB_OS_LATCH_HH
+#define EDB_OS_LATCH_HH
 namespace edb {
-class EdbOptions {
+enum class LatchMode { SHARED, EXCLUSIVE };
+class Latch {
 public:
-  EdbOptions();
-  ~EdbOptions();
 
-public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
-
-private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
+protected:
+  LatchMode _mode{LatchMode::EXCLUSIVE};
 };
-
+class SLatch : public Latch {};
+class XLatch : public Latch {};
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_OS_LATCH_HH

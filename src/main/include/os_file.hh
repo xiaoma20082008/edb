@@ -11,40 +11,33 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/20.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
+#ifndef EDB_OS_FILE_HH
+#define EDB_OS_FILE_HH
 #include "common.hh"
-
+#include <cstddef>
 namespace edb {
-class EdbOptions {
+class File {
 public:
-  EdbOptions();
-  ~EdbOptions();
+  File();
+  ~File();
+
+  __no_move__(File);
+  __no_copy__(File);
 
 public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
+  int Open(const char *filename, int options = 0);
+  int Read(void *buf, size_t size, int *const len);
+  int Write(const void *buf, size_t len);
+  int Close();
+  bool IsValid();
+  void Seek(unsigned long offset);
+  void Fsync();
 
 private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
+  int _fd{0};
 };
-
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_OS_FILE_HH

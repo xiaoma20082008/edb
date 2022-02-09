@@ -14,6 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-add_custom_target(configure_edb
-        COMMAND "${CMAKE_COMMAND}" -E echo "Checking configuration"
-        )
+

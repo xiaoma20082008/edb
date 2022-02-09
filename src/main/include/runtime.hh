@@ -11,40 +11,30 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/2/8.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
-#include "common.hh"
-
+#ifndef EDB_RUNTIME_HH
+#define EDB_RUNTIME_HH
 namespace edb {
-class EdbOptions {
+class IndexManager;
+class DmsFile;
+class Runtime {
 public:
-  EdbOptions();
-  ~EdbOptions();
+  static Runtime *GetInstance();
 
-public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
+  int Init();
+  int Insert(const void *&in);
+  int Find(const void *&in, void *&out);
+  int Remove(const void *&in);
 
 private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
-};
+  Runtime();
+  ~Runtime() noexcept;
 
+private:
+  IndexManager *_index_manager{};
+  DmsFile *_dms_file{};
+};
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_RUNTIME_HH

@@ -51,7 +51,7 @@ struct _signalInfo
 typedef struct _signalInfo _signalInfo ;
 
 static _signalInfo signalHandleMap [] = {
-   { "Unknow", 0 },
+   { "Unknown", 0 },
    { "SIGHUP", 1 },     //1
    { "SIGINT", 1 },     //2
    { "SIGQUIT", 1 },    //3

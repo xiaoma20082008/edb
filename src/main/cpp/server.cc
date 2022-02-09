@@ -14,12 +14,15 @@
 // Created by chunxiao ma on 2022/1/13.
 //
 #include "server.hh"
+#include "runtime.hh"
 #include "session.hh"
 #include <asio.hpp>
 #include <chrono>
 #include <csignal>
+#include <memory>
 #include <spdlog/spdlog.h>
 #include <thread>
+
 namespace edb {
 using namespace std;
 using namespace std::chrono_literals;
@@ -29,10 +32,10 @@ static void OnSignal(int code) {
   EdbServer::GetInstance()->Close();
 }
 
-struct EdbServer::Impl {
+struct EdbServer::Impl : public std::enable_shared_from_this<EdbServer::Impl> {
   volatile bool initialized_{false};
   volatile bool running_{false};
-  EdbOptions options_{};
+  EdbOptions _options{};
 };
 
 EdbServer::EdbServer() noexcept : impl_(std::make_shared<EdbServer::Impl>()) {}
@@ -43,9 +46,10 @@ EdbServer *EdbServer::GetInstance() noexcept {
 }
 
 int EdbServer::Init(int argc, char **argv) noexcept {
-  int ret = impl_->options_.Parse(argc, argv);
+  int ret = impl_->_options.Parse(argc, argv);
   if (ret == EDB_OK) {
     impl_->initialized_ = true;
+    Runtime::GetInstance()->Init();
   }
   return ret;
 }

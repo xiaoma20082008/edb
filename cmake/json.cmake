@@ -14,16 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 FetchContent_Declare(
-        protobuf
-        GIT_REPOSITORY https://github.com/protocolbuffers/protobuf.git
-        GIT_TAG        v3.19.3
-        SOURCE_SUBDIR  cmake
+        json
+        GIT_REPOSITORY https://github.com/open-source-parsers/jsoncpp.git
+        GIT_TAG        1.9.5
 )
-set(protobuf_BUILD_TESTS            OFF CACHE INTERNAL "")
-set(protobuf_BUILD_PROTOC_BINARIES  OFF CACHE INTERNAL "")
-set(protobuf_BUILD_LIBPROTOC        OFF CACHE INTERNAL "")
-set(protobuf_BUILD_SHARED_LIBS      ON  CACHE INTERNAL "")
-set(protobuf_DISABLE_RTTI           ON  CACHE INTERNAL "")
-add_definitions("-DNDEBUG")
-FetchContent_MakeAvailable(protobuf)
+FetchContent_GetProperties(json)
+if(NOT json_POPULATED)
+    FetchContent_Populate(json)
+endif()
+set(JSONCPP_WITH_TESTS OFF)
+set(JSONCPP_WITH_POST_BUILD_UNITTEST OFF)
+#FetchContent_MakeAvailable(json)
+add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR})

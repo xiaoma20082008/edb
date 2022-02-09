@@ -11,40 +11,32 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/20.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
+#ifndef EDB_DMS_HH
+#define EDB_DMS_HH
 #include "common.hh"
-
+#include "os_mmap_file.hh"
 namespace edb {
-class EdbOptions {
+struct Rid {
+  unsigned long _page_id{};
+  unsigned long _slot_id{};
+};
+struct Record {};
+struct Header {};
+struct PageHeader {};
+class IndexManager;
+class DmsFile : public MMapFile {
 public:
-  EdbOptions();
-  ~EdbOptions();
+  DmsFile(IndexManager *index_manager);
+  ~DmsFile();
 
 public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
+  int Initialize();
 
 private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
+  const IndexManager *_index_manager{};
 };
-
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_DMS_HH

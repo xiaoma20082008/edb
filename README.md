@@ -19,6 +19,9 @@ cd edb
 mkdir -p build/Debug && cd build/Debug && cmake ../.. && make
 ```
 
+## Docs
+* [Arch](docs/architecture.md)
+
 ## Credit
 
 * Network using [Asio](https://github.com/chriskohlhoff/asio.git)

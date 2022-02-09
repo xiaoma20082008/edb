@@ -11,15 +11,8 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/21.
 //
 
-#ifndef EDB_ROW_HH
-#define EDB_ROW_HH
-namespace edb {
-struct Row {
-  unsigned long page_id_{};
-  unsigned long slot_id_{};
-};
-} // namespace edb
-#endif // EDB_ROW_HH
+#include "log.hh"
+namespace edb {}

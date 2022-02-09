@@ -11,40 +11,18 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/1/20.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
-#include "common.hh"
-
+#include "dms.hh"
 namespace edb {
-class EdbOptions {
-public:
-  EdbOptions();
-  ~EdbOptions();
+DmsFile::DmsFile(IndexManager *index_manager) : _index_manager(index_manager) {}
+DmsFile::~DmsFile() {}
 
-public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
-
-private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
-};
+int DmsFile::Initialize() {
+  if (_index_manager != nullptr) {
+  }
+  return EDB_OK;
+}
 
 } // namespace edb
-#endif // EDB_OPTIONS_HH

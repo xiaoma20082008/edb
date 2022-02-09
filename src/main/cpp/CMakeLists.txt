@@ -17,19 +17,31 @@
 add_library(edb2)
 target_sources(
         edb2 PRIVATE
+        # Process Model
         command.cc
-        index.cc
         msg.cc
         options.cc
-        row.cc
         session.cc
+        # Runtime
+        runtime.cc
+        # Index Management System
+        ims.cc
+        # JSON
+        json.cc
+        # Logging
+        log.cc
+        # Data Management System
+        dms.cc
+        # Operating System
+        os_file.cc os_hash.cc os_latch.cc os_socket.cc os_mmap_file.cc
+        # Others
+        settings.cc
 )
-add_dependencies(edb2 configure_edb)
 
-#target_link_libraries(edb2 PRIVATE spdlog)
+target_link_libraries(edb2 PRIVATE asio spdlog jsoncpp_lib)
 
 add_executable(cli main_cli.cc)
 add_executable(srv main_srv.cc server.cc)
 
-target_link_libraries(srv PRIVATE asio edb2 spdlog)
-target_link_libraries(cli PRIVATE asio edb2 spdlog)
+target_link_libraries(srv PRIVATE asio edb2 spdlog jsoncpp_lib)
+target_link_libraries(cli PRIVATE asio edb2 spdlog jsoncpp_lib)

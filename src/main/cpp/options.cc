@@ -28,17 +28,24 @@ int EdbOptions::Parse(int argc, char **argv) {
   // --name=
   // --port=
   // --pool-size=
+  for (int i = 1; i < argc; ++i) {
+  }
   int ret = EDB_OK;
+  _name = "EdbServer";
+  _port = 9099;
+  _pool_size = 64;
+  _base_dir = "/var/tmp/edb";
+  _data_dir = "/var/tmp/edb/data";
   return ret;
 }
 
 // region getter
 
-int EdbOptions::GetPort() { return port_; }
-int EdbOptions::GetPoolSize() { return pool_size_; }
-const char *EdbOptions::GetSrvName() { return name_; }
-const char *EdbOptions::GetBaseDir() { return base_dir_; }
-const char *EdbOptions::GetDataDir() { return data_dir_; }
+int EdbOptions::GetPort() const { return _port; }
+int EdbOptions::GetPoolSize() const { return _pool_size; }
+const char *EdbOptions::GetSrvName() const { return _name; }
+const char *EdbOptions::GetBaseDir() const { return _base_dir; }
+const char *EdbOptions::GetDataDir() const { return _data_dir; }
 
 // endregion getter
 

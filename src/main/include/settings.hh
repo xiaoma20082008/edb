@@ -11,40 +11,30 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/2/7.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
-#include "common.hh"
+#ifndef EDB_SETTINGS_HH
+#define EDB_SETTINGS_HH
+#include <unordered_map>
 
 namespace edb {
-class EdbOptions {
+class Settings {
 public:
-  EdbOptions();
-  ~EdbOptions();
-
-public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
+  long GetLong(const char *key) const;
+  int GetInt(const char *key) const;
+  bool GetBool(const char *key) const;
+  const char *GetString(const char *key) const;
 
 private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
-};
+  void ParseArgs(int argc, char **argv);
+  void ParseFile(const char *file);
 
+private:
+  std::unordered_map<const char *, const char *> _data{};
+
+public:
+  Settings(int argc, char **argv);
+};
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_SETTINGS_HH

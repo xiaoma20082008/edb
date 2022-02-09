@@ -11,40 +11,36 @@
 // limitations under the License.
 
 //
-// Created by chunxiao ma on 2022/1/13.
+// Created by chunxiao ma on 2022/2/8.
 //
 
-#ifndef EDB_OPTIONS_HH
-#define EDB_OPTIONS_HH
-
-#include "common.hh"
-
+#ifndef EDB_IMS_HH
+#define EDB_IMS_HH
+#include "json.hh"
+#include <vector>
 namespace edb {
-class EdbOptions {
+constexpr int INDEX_HASH_MAP_SIZE = 1024;
+struct Rid;
+
+class IndexManager {
 public:
-  EdbOptions();
-  ~EdbOptions();
+  IndexManager();
+  ~IndexManager();
 
 public:
-  int Parse(int argc, char **argv);
-
-  // region getter
-
-  int GetPort() const;
-  int GetPoolSize() const;
-  const char *GetSrvName() const;
-  const char *GetBaseDir() const;
-  const char *GetDataDir() const;
-
-  // endregion getter
+  int Initialize();
+  int CreateIndex(JsonObject *doc, Rid *record);
+  int FindIndex(JsonObject *doc, Rid *record);
+  int DropIndex(JsonObject *doc, Rid *record);
+  int Exists(JsonObject *doc);
 
 private:
-  const char *_base_dir{};
-  const char *_data_dir{};
-  const char *_name{};
-  int _port{};
-  int _pool_size{};
+  int Process();
+
+private:
+  struct Bucket;
+  std::vector<Bucket *> _buckets;
 };
 
 } // namespace edb
-#endif // EDB_OPTIONS_HH
+#endif // EDB_IMS_HH
